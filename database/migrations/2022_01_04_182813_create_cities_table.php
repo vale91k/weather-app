@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateCitiesTable extends Migration
@@ -16,9 +17,17 @@ class CreateCitiesTable extends Migration
         Schema::create('cities', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->string('name');
-            $table->decimal('lat', 10,7)->nullable();
-            $table->decimal('lng', 10,7)->nullable();
+            $table->decimal('lat', 10, 7)->nullable();
+            $table->decimal('lng', 10, 7)->nullable();
         });
+
+        DB::table('cities')->insert(
+            [
+                'name' => 'Moskow',
+                'lat' => 55.751244,
+                'lng' => 37.618423
+            ]
+        );
     }
 
     /**
