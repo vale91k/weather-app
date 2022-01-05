@@ -1,8 +1,8 @@
 @extends('layouts.main.app')
-@dump($weatherData)
+
 @section('content')
     <div class="container">
-        <h3>{{$cityName}}</h3>
+        <h3>{{$city->name}}</h3>
         <div class="row justify-content-center">
             <table class="table table-striped">
                 <thead>
