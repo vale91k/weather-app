@@ -9,7 +9,7 @@ class WeatherReceiver
     const API_WEATHER_URL = 'https://api.openweathermap.org/data/2.5/onecall';
     const API_WEATHER_KEY = '9fa7ebba7495dc607c7c867392b10d6f';
 
-    public static function getDailyForecastByCoordinate($lat, $lon): object
+    public static function getDailyForecastFromApi($lat, $lon): object
     {
         $response = Http::get(self::API_WEATHER_URL, [
             'lat' => $lat,
@@ -19,5 +19,10 @@ class WeatherReceiver
             'exclude' => 'minutely,hourly,alerts,current'
         ]);
         return $response->object();
+    }
+
+    public static function getDailyForecastFromDb($cityId)
+    {
+
     }
 }

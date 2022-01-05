@@ -21,7 +21,7 @@ class MainController extends Controller
     public function __invoke()
     {
         $data = [];
-        $data['city'] = City::find($this->defaultCityId);
+        $data['city'] = City::find(self::DEFAULT_CITY_ID, ['id', 'name']);
         $data['weatherData'] = [];
         return view('home', $data);
     }
