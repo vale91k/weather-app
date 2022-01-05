@@ -21,8 +21,11 @@ class MainController extends Controller
     public function __invoke()
     {
         $data = [];
-        $data['city'] = City::find(self::DEFAULT_CITY_ID, ['id', 'name']);
-        $data['weatherData'] = [];
+        $city = City::find(self::DEFAULT_CITY_ID);
+        $data['city'] = $city;
+        // TODO сделать проверку на наличие результатов
+        // TODO посмотреть как конвертировать дату в формат для красивого вывода
+        $data['weatherData'] = WeatherReceiver::getDailyForecastFromApi($city->lat, $city->lng);
         return view('home', $data);
     }
 }

@@ -16,9 +16,10 @@
                 @if (!empty($weatherData))
                     @foreach($weatherData as $weatherRow)
                         <tr>
-                            <td>{{$weatherRow['date']}}</td>
-                            <td>{{$weatherRow['temp']}}</td>
-                            <td>{{$weatherRow['cloudy']}}</td>
+                            {{-- TODO сделать корректный вывод даты --}}
+                            <td>{{$weatherRow->dt->format('d.m.Y')}}</td>
+                            <td>{{$weatherRow->temp->day}}</td>
+                            <td>{{$weatherRow->clouds}}</td>
                         </tr>
                     @endforeach
                 @endif
