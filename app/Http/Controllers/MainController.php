@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\City;
-use App\WeatherReceiver;
+use App\Models\Forecast;
+use App\WeatherDataManager;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -11,8 +12,6 @@ use Illuminate\Contracts\View\View;
 
 class MainController extends Controller
 {
-    const DEFAULT_CITY_ID = 1;
-
     /**
      * Handle the incoming request.
      *
@@ -20,12 +19,14 @@ class MainController extends Controller
      */
     public function __invoke()
     {
+        // TODO сделать проверку по городу и результатам в таблице и только после этого инициализировать заполнение таблицы
+        WeatherDataManager::insertInitialData();
+        $cityId = City::DEFAULT_CITY_ID;
         $data = [];
-        $city = City::find(self::DEFAULT_CITY_ID);
+        $city = City::find($cityId);
         $data['city'] = $city;
         // TODO сделать проверку на наличие результатов
-        // TODO посмотреть как конвертировать дату в формат для красивого вывода
-        $data['weatherData'] = WeatherReceiver::getDailyForecastFromApi($city->lat, $city->lng);
+        $data['weatherData'] = Forecast::where('city_id', $cityId)->get();
         return view('home', $data);
     }
 }

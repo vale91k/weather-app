@@ -17,8 +17,8 @@
                     @foreach($weatherData as $weatherRow)
                         <tr>
                             {{-- TODO сделать корректный вывод даты --}}
-                            <td>{{$weatherRow->dt->format('d.m.Y')}}</td>
-                            <td>{{$weatherRow->temp->day}}</td>
+                            <td>{{$weatherRow->date}}</td>
+                            <td>{{$weatherRow->temp}}</td>
                             <td>{{$weatherRow->clouds}}</td>
                         </tr>
                     @endforeach

@@ -12,4 +12,5 @@ use Illuminate\Database\Eloquent\Model;
 class City extends Model
 {
     use HasFactory;
+    const DEFAULT_CITY_ID = 1;
 }

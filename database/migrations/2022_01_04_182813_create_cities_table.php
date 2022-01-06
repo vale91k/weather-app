@@ -18,14 +18,14 @@ class CreateCitiesTable extends Migration
             $table->increments('id')->index();
             $table->string('name');
             $table->decimal('lat', 10, 7)->nullable();
-            $table->decimal('lng', 10, 7)->nullable();
+            $table->decimal('lon', 10, 7)->nullable();
         });
 
         DB::table('cities')->insert(
             [
                 'name' => 'Moskow',
                 'lat' => 55.751244,
-                'lng' => 37.618423
+                'lon' => 37.618423
             ]
         );
     }
