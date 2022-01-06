@@ -28,6 +28,13 @@ class CreateCitiesTable extends Migration
                 'lon' => 37.618423
             ]
         );
+        DB::table('cities')->insert(
+            [
+                'name' => 'Magnitogorsk',
+                'lat' => 53.41861,
+                'lon' => 59.04722
+            ]
+        );
     }
 
     /**
