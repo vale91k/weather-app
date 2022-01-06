@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Forecast;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -20,6 +21,7 @@ class CreateForecastsTable extends Migration
             $table->decimal('temp', 5, 2);
             $table->integer('clouds');
         });
+        Forecast::insertDataFromApi();
     }
 
     /**

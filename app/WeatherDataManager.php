@@ -23,18 +23,4 @@ class WeatherDataManager
         ]);
         return $response->object()->daily;
     }
-
-    public static function insertInitialData($cityId = City::DEFAULT_CITY_ID)
-    {
-        $city = City::find($cityId);
-        $dailyData = self::getDailyForecastFromApi($city['lat'], $city['lon']);
-        foreach ($dailyData as $dayData) {
-            DB::table('forecasts')->insert([
-                'city_id' => City::DEFAULT_CITY_ID,
-                'date' => date('Y-m-d H:i:s', $dayData->dt),
-                'temp' => $dayData->temp->day,
-                'clouds' => $dayData->clouds
-            ]);
-        }
-    }
 }

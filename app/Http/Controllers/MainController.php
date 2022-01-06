@@ -19,14 +19,10 @@ class MainController extends Controller
      */
     public function __invoke()
     {
-        // TODO сделать проверку по городу и результатам в таблице и только после этого инициализировать заполнение таблицы
-        WeatherDataManager::insertInitialData();
-        $cityId = City::DEFAULT_CITY_ID;
         $data = [];
-        $city = City::find($cityId);
-        $data['city'] = $city;
-        // TODO сделать проверку на наличие результатов
-        $data['weatherData'] = Forecast::where('city_id', $cityId)->get();
+        $cityId = City::DEFAULT_CITY_ID;
+        $data['city'] = City::find($cityId);
+        $data['weatherData'] = Forecast::getForecastByCityId($cityId);
         return view('home', $data);
     }
 }

@@ -16,7 +16,6 @@
                 @if (!empty($weatherData))
                     @foreach($weatherData as $weatherRow)
                         <tr>
-                            {{-- TODO сделать корректный вывод даты --}}
                             <td>{{$weatherRow->date}}</td>
                             <td>{{$weatherRow->temp}}</td>
                             <td>{{$weatherRow->clouds}}</td>
