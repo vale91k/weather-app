@@ -2,11 +2,9 @@
 
 namespace App;
 
-use App\Models\City;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 
-class WeatherDataManager
+class ForecastReceiver
 {
     const API_WEATHER_URL = 'https://api.openweathermap.org/data/2.5/onecall';
     const API_WEATHER_KEY = '9fa7ebba7495dc607c7c867392b10d6f';

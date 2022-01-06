@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\WeatherDataManager;
+use App\ForecastReceiver;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -26,7 +26,7 @@ class Forecast extends Model
     {
         $city = City::find($cityId);
         // TODO добавлять обновление результатов прогноза погоды?
-        $dailyData = WeatherDataManager::getDailyForecastFromApi($city['lat'], $city['lon']);
+        $dailyData = ForecastReceiver::getDailyForecastFromApi($city['lat'], $city['lon']);
         foreach ($dailyData as $dayData) {
             DB::table('forecasts')->insert([
                 'city_id' => City::DEFAULT_CITY_ID,

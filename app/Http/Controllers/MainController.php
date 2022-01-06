@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\City;
 use App\Models\Forecast;
-use App\WeatherDataManager;
+use App\ForecastReceiver;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
