@@ -5,19 +5,25 @@ namespace App\Models;
 use App\ForecastReceiver;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class Forecast extends Model
 {
     use HasFactory;
 
+    const MIN_FORECAST_ROWS = 8;
+
     public static function getForecastByCityId($cityId = City::DEFAULT_CITY_ID)
     {
-        // TODO добавить проверку на время и кол-во результатов
-        $res = Forecast::where('city_id', $cityId)->get();
-        if ($res->isEmpty()) {
+        $res = self::where([
+            ['city_id', $cityId],
+            ['date', '>=', Carbon::today()]
+        ])->get();
+        if ($res->count() < self::MIN_FORECAST_ROWS) {
+            self::cleanDataByCityId($cityId);
             self::insertDataFromApi($cityId);
-            $res = Forecast::where('city_id', $cityId)->get();
+            $res = self::where('city_id', $cityId)->whereDate('date', '>=', Carbon::now())->get();
         }
         return $res;
     }
@@ -25,9 +31,9 @@ class Forecast extends Model
     public static function insertDataFromApi($cityId = City::DEFAULT_CITY_ID)
     {
         $city = City::find($cityId);
-        // TODO добавлять обновление результатов прогноза погоды?
         $dailyData = ForecastReceiver::getDailyForecastFromApi($city['lat'], $city['lon']);
         foreach ($dailyData as $dayData) {
+
             DB::table('forecasts')->insert([
                 'city_id' => City::DEFAULT_CITY_ID,
                 'date' => date('Y-m-d H:i:s', $dayData->dt),
@@ -35,6 +41,10 @@ class Forecast extends Model
                 'clouds' => $dayData->clouds
             ]);
         }
+    }
 
+    public static function cleanDataByCityId($cityId)
+    {
+        self::where('city_id', $cityId)->delete();
     }
 }
