@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\City;
+use App\Models\Forecast;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -20,6 +21,7 @@ class ProjectTest extends TestCase
     {
         parent::setUp();
         $this->city = City::factory()->make();
+        $this->forecasts = Forecast::factory()->make();
     }
 
     public function test_getOkMain()
@@ -35,4 +37,12 @@ class ProjectTest extends TestCase
         $view->assertSee($this->city->name);
     }
 
+    public function test_seeForecastResultsOnMain()
+    {
+        $data['weatherData'] = [$this->forecasts];
+        $view = $this->view('home', $data);
+        $view->assertSee($this->forecasts->date);
+        $view->assertSee($this->forecasts->temp);
+        $view->assertSee($this->forecasts->clouds);
+    }
 }
