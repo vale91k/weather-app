@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h3>{{$city->name}}</h3>
+        <h3>{{$city->name ?? ''}}</h3>
         <div class="row justify-content-center">
             <table class="table table-striped">
                 <thead>
