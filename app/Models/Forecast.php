@@ -35,13 +35,15 @@ class Forecast extends Model
             throw new \Exception('There are no cities with id ' . $cityId);
         }
         $dailyData = ForecastReceiver::getDailyForecastFromApi($city['lat'], $city['lon']);
-        foreach ($dailyData as $dayData) {
-            DB::table('forecasts')->insert([
-                'city_id' => City::DEFAULT_CITY_ID,
-                'date' => date('Y-m-d H:i:s', $dayData->dt),
-                'temp' => $dayData->temp->day,
-                'clouds' => $dayData->clouds
-            ]);
+        if ($dailyData) {
+            foreach ($dailyData as $dayData) {
+                DB::table('forecasts')->insert([
+                    'city_id' => City::DEFAULT_CITY_ID,
+                    'date' => date('Y-m-d H:i:s', $dayData->dt),
+                    'temp' => $dayData->temp->day,
+                    'clouds' => $dayData->clouds
+                ]);
+            }
         }
     }
 
