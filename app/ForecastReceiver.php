@@ -18,7 +18,9 @@ class ForecastReceiver
             'exclude' => 'minutely,hourly,alerts,current',
             'units' => 'metric'
         ]);
-
+        if ($response->status() != 200) {
+            return false;
+        }
         return $response->object()->daily;
     }
 }
