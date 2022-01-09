@@ -18,9 +18,7 @@ class ForecastReceiver
             'exclude' => 'minutely,hourly,alerts,current',
             'units' => 'metric'
         ]);
-        if ($response->status() != 200) {
-            throw new \Exception('Response status from Api is ' . $response->status());
-        }
+
         return $response->object()->daily;
     }
 }
