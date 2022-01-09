@@ -31,9 +31,11 @@ class Forecast extends Model
     public static function insertDataFromApi($cityId = City::DEFAULT_CITY_ID)
     {
         $city = City::find($cityId);
+        if (empty($city)) {
+            throw new \Exception('There are no cities with id ' . $cityId);
+        }
         $dailyData = ForecastReceiver::getDailyForecastFromApi($city['lat'], $city['lon']);
         foreach ($dailyData as $dayData) {
-
             DB::table('forecasts')->insert([
                 'city_id' => City::DEFAULT_CITY_ID,
                 'date' => date('Y-m-d H:i:s', $dayData->dt),
@@ -43,7 +45,7 @@ class Forecast extends Model
         }
     }
 
-    public static function cleanDataByCityId($cityId)
+    private static function cleanDataByCityId($cityId)
     {
         self::where('city_id', $cityId)->delete();
     }

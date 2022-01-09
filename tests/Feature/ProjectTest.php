@@ -11,6 +11,7 @@ use Tests\TestCase;
 class ProjectTest extends TestCase
 {
     private $city;
+    private $forecasts;
 
     /**
      * Define the model's default state.
