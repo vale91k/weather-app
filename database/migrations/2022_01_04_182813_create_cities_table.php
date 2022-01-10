@@ -23,7 +23,7 @@ class CreateCitiesTable extends Migration
 
         DB::table('cities')->insert(
             [
-                'name' => 'Moskow',
+                'name' => 'Moscow',
                 'lat' => 55.751244,
                 'lon' => 37.618423
             ]
