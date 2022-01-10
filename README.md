@@ -16,6 +16,7 @@ cp .env.example .env
 ```
 docker-compose up
 ```
+После запуска перейти по http://0.0.0.0:8000/
 4. Для тестирования нужно перейти в контейнер bitnami/laravel:8 и запустить
 ```
 php artisan test
