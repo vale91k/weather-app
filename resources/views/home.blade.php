@@ -8,15 +8,15 @@
                 <thead>
                 <tr>
                     <th scope="col">Дата</th>
-                    <th scope="col">Температура</th>
-                    <th scope="col">Облачность</th>
+                    <th scope="col">Температура (°C)</th>
+                    <th scope="col">Облачность (%)</th>
                 </tr>
                 </thead>
                 <tbody>
                 @if (!empty($weatherData))
                     @foreach($weatherData as $weatherRow)
                         <tr>
-                            <td>{{$weatherRow->date}}</td>
+                            <td>{{date('d-m-Y', strtotime($weatherRow->date));}}</td>
                             <td>{{$weatherRow->temp}}</td>
                             <td>{{$weatherRow->clouds}}</td>
                         </tr>
