@@ -14,6 +14,9 @@ class Forecast extends Model
 
     const MIN_FORECAST_ROWS = 8;
 
+    /**
+     * @throws \Exception
+     */
     public static function getForecastByCityId($cityId = City::DEFAULT_CITY_ID)
     {
         $res = self::where([
@@ -38,7 +41,7 @@ class Forecast extends Model
         if ($dailyData) {
             foreach ($dailyData as $dayData) {
                 DB::table('forecasts')->insert([
-                    'city_id' => City::DEFAULT_CITY_ID,
+                    'city_id' => $cityId,
                     'date' => date('Y-m-d H:i:s', $dayData->dt),
                     'temp' => $dayData->temp->day,
                     'clouds' => $dayData->clouds

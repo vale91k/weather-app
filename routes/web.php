@@ -14,4 +14,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', MainController::class);
+Route::get('/', [MainController::class, 'index'])->name('index');
+Route::get('/{city}', [MainController::class, 'detail'])->name('detail');
