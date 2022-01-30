@@ -33,6 +33,7 @@ class MainController extends Controller
     public function detail(City $city)
     {
         $data = $this->getDataByCityId($city->id);
+        $data['isDetail'] = true;
         return view('home', $data);
     }
 

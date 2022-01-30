@@ -24,6 +24,9 @@
                 @endif
                 </tbody>
             </table>
+            @if(!empty($isDetail))
+                <a href="{{ route('index') }}" class="btn btn-secondary btn-lg active">Вернуться на главную</a>
+            @endif
         </div>
     </div>
 @endsection
