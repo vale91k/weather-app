@@ -16,7 +16,7 @@
                 @if (!empty($weatherData))
                     @foreach($weatherData as $weatherRow)
                         <tr>
-                            <td>{{date('d-m-Y', strtotime($weatherRow->date));}}</td>
+                            <td>{{date('d-m-Y', strtotime($weatherRow->date))}}</td>
                             <td>{{$weatherRow->temp}}</td>
                             <td>{{$weatherRow->clouds}}</td>
                         </tr>

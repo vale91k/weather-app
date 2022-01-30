@@ -42,6 +42,7 @@ class ProjectTest extends TestCase
     {
         $data['weatherData'] = [$this->forecasts];
         $view = $this->view('home', $data);
+        $view->assertSee(date('d-m-Y', strtotime($this->forecasts->date)));
         $view->assertSee($this->forecasts->temp);
         $view->assertSee($this->forecasts->clouds);
     }
