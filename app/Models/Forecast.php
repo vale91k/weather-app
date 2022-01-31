@@ -14,6 +14,11 @@ class Forecast extends Model
 
     const MIN_FORECAST_ROWS = 8;
 
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
+
     /**
      * @throws \Exception
      */
