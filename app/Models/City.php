@@ -12,5 +12,11 @@ use Illuminate\Database\Eloquent\Model;
 class City extends Model
 {
     use HasFactory;
+
     const DEFAULT_CITY_ID = 1;
+
+    public function forecasts(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Forecast::class);
+    }
 }

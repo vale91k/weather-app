@@ -13,16 +13,40 @@ use Illuminate\Contracts\View\View;
 class MainController extends Controller
 {
     /**
-     * Handle the incoming request.
+     * Главная страница.
      *
      * @return Application|Factory|View
+     * @throws \Exception
      */
-    public function __invoke()
+    public function index()
     {
-        $data = [];
         $cityId = City::DEFAULT_CITY_ID;
-        $data['city'] = City::find($cityId);
-        $data['weatherData'] = Forecast::getForecastByCityId($cityId);
+        $data = $this->getDataByCityId($cityId);
         return view('home', $data);
+    }
+
+    /**
+     * Детальная страница по городу
+     * @return Application|Factory|View
+     * @throws \Exception
+     */
+    public function detail(City $city)
+    {
+        $data = $this->getDataByCityId($city->id);
+        $data['isDetail'] = true;
+        return view('home', $data);
+    }
+
+    /**
+     * Отдаёт данные в зависимости от входящего города
+     * @return Application|Factory|View
+     * @throws \Exception
+     */
+    private function getDataByCityId($cityId): array
+    {
+        $res = [];
+        $res['city'] = City::find($cityId);
+        $res['weatherData'] = Forecast::getForecastByCityId($cityId);
+        return $res;
     }
 }

@@ -15,8 +15,8 @@ class CreateForecastsTable extends Migration
     public function up()
     {
         Schema::create('forecasts', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('city_id');
+            $table->id();
+            $table->foreignId('city_id')->contained()->onDelete('cascade');
             $table->date('date');
             $table->decimal('temp', 5, 2);
             $table->integer('clouds');

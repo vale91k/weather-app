@@ -16,7 +16,7 @@
                 @if (!empty($weatherData))
                     @foreach($weatherData as $weatherRow)
                         <tr>
-                            <td>{{date('d-m-Y', strtotime($weatherRow->date));}}</td>
+                            <td>{{date('d-m-Y', strtotime($weatherRow->date))}}</td>
                             <td>{{$weatherRow->temp}}</td>
                             <td>{{$weatherRow->clouds}}</td>
                         </tr>
@@ -24,6 +24,9 @@
                 @endif
                 </tbody>
             </table>
+            @if(!empty($isDetail))
+                <a href="{{ route('index') }}" class="btn btn-secondary btn-lg active">Вернуться на главную</a>
+            @endif
         </div>
     </div>
 @endsection
