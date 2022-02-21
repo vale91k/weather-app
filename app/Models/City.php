@@ -13,7 +13,7 @@ class City extends Model
 {
     use HasFactory;
 
-    const DEFAULT_CITY_ID = 1;
+    const DEFAULT_CITY_ID = 2;
 
     public function forecasts(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
